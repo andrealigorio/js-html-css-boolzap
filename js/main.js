@@ -87,7 +87,7 @@ var root = new Vue({
                 ],
             },
         ],
-        activeItem : {name: 'Michele', avatar: '_1'},
+        activeItem: {},
         activeMessages: [],
         newMessage: ""
     },
@@ -120,5 +120,9 @@ var root = new Vue({
                                             date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds}`})
             }, 1000);
         }
+    },
+    created() {
+        this.activeItem = this.contacts[0];
+        this.activeMessages = this.contacts[0].messages;
     }
 });
