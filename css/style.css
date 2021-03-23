@@ -157,6 +157,18 @@ body {
     padding: 20px;
     border-radius: 10px;
     margin: 10px 0;
+    position: relative;
+}
+.speech_bubble i {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    color: #b1b1b1;
+    cursor: pointer;
+    display: none;
+}
+.speech_bubble:hover i {
+    display: block;
 }
 .received_message {
     background-color: white;
