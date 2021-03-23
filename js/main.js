@@ -114,6 +114,11 @@ var root = new Vue({
                                             date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds}`});
                 this.newMessage = "";
             }
+            setTimeout( () => {
+                this.activeMessages.push({ text: "ok",
+                                            status: 'received',
+                                            date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds}`})
+            }, 1000);
         }
     }
 });
