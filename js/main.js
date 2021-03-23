@@ -88,12 +88,32 @@ var root = new Vue({
             },
         ],
         activeItem : {name: 'Michele', avatar: '_1'},
-        activeMessages: []
+        activeMessages: [],
+        newMessage: ""
     },
     methods: {
         selectedItem(index) {
             this.activeItem = this.contacts[index];
             this.activeMessages = this.contacts[index].messages;
+        },
+        addMessage() {
+            var data = new Date();
+            var year = data.getFullYear();
+            var month = data.getMonth();
+            month += 1;
+            var day = data.getDate();
+            var hours = data.getHours();
+            var minuts = data.getMinutes();
+            var seconds = data.getSeconds();
+            if (day < 10) day = "0" + day;
+            if (month < 10) month = "0" + month;
+            if (hours < 10) hours = "0" + hours;
+            if(this.newMessage != "") {
+                this.activeMessages.push({ text: this.newMessage, 
+                                            status: 'sent', 
+                                            date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds}`});
+                this.newMessage = "";
+            }
         }
     }
 });
