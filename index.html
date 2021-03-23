@@ -19,10 +19,10 @@
             <div class="user">
                 <div class="item">
                     <div class="image_user">
-                        <img src="img/avatar_io.jpg" alt="">
+                        <img src="img/avatar_io.jpg" alt="Andrea">
                     </div>
                     <div class="username">
-                        <span>Nome</span>
+                        <span>Andrea</span>
                     </div>
                 </div>
                 <div class="icons">
@@ -51,12 +51,12 @@
                 </div>
             </div>
             <div class="other_users">
-                <div class="users_item">
+                <div @click="selectedItem(index)" v-for="(item, index) in contacts" class="users_item" :class="(activeItem.name == item.name) ? 'active' : null">
                     <div class="image_user">
-                        <img src="img/avatar_1.jpg" alt="">
+                        <img :src="'img/avatar' + item.avatar + '.jpg'" :alt="item.name">
                     </div>
                     <div class="username">
-                        <span>Nome</span>
+                        <span>{{item.name}}</span>
                     </div>
                 </div>
             </div>
@@ -65,11 +65,11 @@
             <div class="message_user">
                 <div class="item">
                     <div class="image_user">
-                        <img src="img/avatar_io.jpg" alt="">
+                        <img :src="'img/avatar' + activeItem.avatar + '.jpg'" alt="">
                     </div>
                     <div class="user_info">
                         <div class="username">
-                            <span>Nome</span>
+                            <span>{{activeItem.name}}</span>
                         </div>
                         <div class="last_access">
                             Ultimo accesso oggi alle
@@ -83,31 +83,12 @@
                 </div>
             </div>
             <div class="message_area">
-                <div class="speech_bubble send_message">
+                <div v-for="(message, index) in activeMessages" class="speech_bubble" :class="activeMessages[index].status + '_message'">
                     <div class="message_text">
-                        messaggio di prova
+                        {{activeMessages[index].text}}
                     </div>
                     <div class="date_hours">
-                        <span class="date">10/01/2020</span>
-                        <span class="hours">16:15</span>
-                    </div>
-                </div>
-                <div class="speech_bubble send_message">
-                    <div class="message_text">
-                        messaggio di prova
-                    </div>
-                    <div class="date_hours">
-                        <span class="date">10/01/2020</span>
-                        <span class="hours">16:15</span>
-                    </div>
-                </div>
-                <div class="speech_bubble receive_message">
-                    <div class="message_text">
-                        messaggio di prova
-                    </div>
-                    <div class="date_hours">
-                        <span class="date">10/01/2020</span>
-                        <span class="hours">16:15</span>
+                        <span class="date">{{activeMessages[index].date}}</span>
                     </div>
                 </div>
             </div>
