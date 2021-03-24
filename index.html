@@ -19,10 +19,10 @@
             <div class="user">
                 <div class="item">
                     <div class="image_user">
-                        <img src="img/avatar_io.jpg" alt="Andrea">
+                        <img :src="'img/avatar'+ user.avatar +'.jpg'" alt="user.name">
                     </div>
                     <div class="username">
-                        <span>Andrea</span>
+                        <span>{{user.name}}</span>
                     </div>
                 </div>
                 <div class="icons">
@@ -47,11 +47,11 @@
             <div class="search">
                 <div class="search_bar">
                     <label for="search"><i class="fas fa-search"></i></label>
-                    <input id="search" type="text" placeholder="Cerca o inizia nuova chat">
+                    <input @keyup="searchName(contactName, contacts)" v-model="contactName" id="search" type="text" placeholder="Cerca o inizia nuova chat">
                 </div>
             </div>
-            <div class="other_users">
-                <div @click="selectedItem(index)" v-for="(item, index) in contacts" class="users_item" :class="(activeItem.name == item.name) ? 'active' : null">
+            <div class="contacts">
+                <div @click="selectedItem(index)" v-for="(item, index) in contacts" class="users_item" :class="(activeItem.name == item.name) ? 'active' : null" v-if="item.visible">
                     <div class="image_user">
                         <img :src="'img/avatar' + item.avatar + '.jpg'" :alt="item.name">
                     </div>

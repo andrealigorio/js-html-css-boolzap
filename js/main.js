@@ -2,6 +2,10 @@ Vue.config.devtools = true;
 var root = new Vue({
     el: '#root',
     data: {
+        user: {
+            name: 'Andrea Ligorio',
+            avatar: '_io'
+        },
         contacts: [
             {
                 name: 'Michele',
@@ -86,10 +90,79 @@ var root = new Vue({
                     }
                 ],
             },
+            {
+                name: 'Marco',
+                avatar: '_5',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        text: 'Come stai oggi?',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        text: 'Tutto bene, grazie',
+                        status: 'received'
+                    }
+                ],
+            },
+            {
+                name: 'Martina',
+                avatar: '_6',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        text: 'Ciao Marti ti va di vedere un film oggi?',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        text: 'Ok aspettami per le 20:00 stasera',
+                        status: 'received'
+                    }
+                ],
+            },
+            {
+                name: 'Matteo',
+                avatar: '_7',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        text: 'Ho visto che sei uscito con Luisa',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        text: 'Si, ma quei baffi non si possono proprio vedere',
+                        status: 'received'
+                    }
+                ],
+            },
+            {
+                name: 'Salvatore',
+                avatar: '_8',
+                visible: true,
+                messages: [
+                    {
+                        date: '10/01/2020 15:30:55',
+                        text: 'Io non ti conosco... io non so chi sei',
+                        status: 'sent'
+                    },
+                    {
+                        date: '10/01/2020 15:50:00',
+                        text: 'So che hai cancellato con un gesto i sogni miei',
+                        status: 'received'
+                    }
+                ],
+            }
         ],
         activeItem: {},
         activeMessages: [],
-        newMessage: ""
+        newMessage: "",
+        contactName: ""
     },
     methods: {
         selectedItem(index) {
@@ -119,10 +192,26 @@ var root = new Vue({
                                             status: 'received',
                                             date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds}`})
             }, 1000);
+        },
+        searchName(contactName, array) {
+            for(var j = 0; j < array.length; j++) {
+                var cont = 0;       //Utilizzo variabile contatore per verificare che tutte le lettere corrispondano
+                for(var i = 0; i < contactName.length; i++) {
+                    if ((contactName.charAt(i) != array[j].name.charAt(i).toUpperCase()) && (contactName.charAt(i) != array[j].name.charAt(i).toLowerCase())) {
+                        array[j].visible = false;
+                    } else {
+                        cont++;
+                    }
+                }
+                if (cont == contactName.length) {
+                    array[j].visible = true;
+                } else {
+                    array[j].visible = false;
+                }
+            }
         }
     },
     created() {
-        this.activeItem = this.contacts[0];
-        this.activeMessages = this.contacts[0].messages;
+        this.selectedItem(0);
     }
 });
