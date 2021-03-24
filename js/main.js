@@ -162,12 +162,15 @@ var root = new Vue({
         activeItem: {},
         activeMessages: [],
         newMessage: "",
-        contactName: ""
+        contactName: "",
+        infoControl: -1,
+        show: false
     },
     methods: {
         selectedItem(index) {
             this.activeItem = this.contacts[index];
             this.activeMessages = this.contacts[index].messages;
+            this.show = false;
         },
         addMessage() {
             var data = new Date();
@@ -209,6 +212,18 @@ var root = new Vue({
                     array[j].visible = false;
                 }
             }
+        },
+        openMessage(index) {
+            if (!this.show) {
+                this.show = true;
+            } else {
+                this.show = false;
+            }
+            this.infoControl = index;
+        },
+        deleteMessage(index) {
+            this.activeMessages.splice(index, 1);
+            this.show = false;
         }
     },
     created() {

@@ -32,8 +32,10 @@
                 </div>
             </div>
             <div class="serving">
-                <div class="bell">
-                    <i class="fas fa-bell-slash"></i>
+                <div class="serving_bell">
+                    <div class="bell">
+                        <i class="fas fa-bell-slash"></i>
+                    </div>
                 </div>
                 <div class="bell_text">
                     <div class="get_serving">
@@ -84,13 +86,17 @@
             </div>
             <div class="message_area">
                 <div v-for="(message, index) in activeMessages" class="speech_bubble" :class="activeMessages[index].status + '_message'">
+                    <i @click="openMessage(index)" class="fas fa-chevron-down"></i>
+                    <div class="info_message" v-show="(infoControl == index) && show">
+                        <div>Message info</div>
+                        <div @click="deleteMessage(index)">Delete message</div>
+                    </div>
                     <div class="message_text">
                         {{activeMessages[index].text}}
                     </div>
                     <div class="date_hours">
                         <span class="date">{{activeMessages[index].date}}</span>
                     </div>
-                    <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
             <div class="write_message">
