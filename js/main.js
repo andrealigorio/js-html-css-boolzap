@@ -159,17 +159,19 @@ var root = new Vue({
                 ],
             }
         ],
+        arrayText: ["ok", "non lo so", "potrebbe essere come dici tu", "per me va bene", "ciao", "no", "sicuramente", "dici sul serio?"],
         activeItem: {},
-        activeMessages: [],
         newMessage: "",
         contactName: "",
         infoControl: -1,
-        show: false
+        show: false,    //Utilizzo variabile show per far comparire e scomparire messaggio di delete
+        messageTime: 4,
+        writen: false,   //Variabile che stabilisce se il contatto sta scrivendo un mex
+        layover: ""
     },
     methods: {
         selectedItem(index) {
             this.activeItem = this.contacts[index];
-            this.activeMessages = this.contacts[index].messages;
             this.show = false;
         },
         addMessage() {
@@ -184,17 +186,23 @@ var root = new Vue({
             if (day < 10) day = "0" + day;
             if (month < 10) month = "0" + month;
             if (hours < 10) hours = "0" + hours;
+            if (minuts < 10) minuts = "0" + minuts;
             if(this.newMessage != "") {
-                this.activeMessages.push({ text: this.newMessage, 
+                this.activeItem.messages.push({ text: this.newMessage, 
                                             status: 'sent', 
                                             date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds}`});
                 this.newMessage = "";
             }
             setTimeout( () => {
-                this.activeMessages.push({ text: "ok",
+                this.writen = true;
+            }, 2000);
+            setTimeout( () => {
+                this.activeItem.messages.push({
+                                            text: this.arrayText[Math.floor(Math.random() * this.arrayText.length)],
                                             status: 'received',
-                                            date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds}`})
-            }, 1000);
+                                            date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds + this.messageTime}`});
+                this.writen = false;
+            }, this.messageTime*1000);
         },
         searchName(contactName, array) {
             for(var j = 0; j < array.length; j++) {
@@ -222,9 +230,17 @@ var root = new Vue({
             this.infoControl = index;
         },
         deleteMessage(index) {
-            this.activeMessages.splice(index, 1);
+            this.activeItem.messages.splice(index, 1);
             this.show = false;
+        },
+        infoMessage() {
+            this.show = false;
+            this.layover = "layover";
+        },
+        closeInfo() {
+            this.layover = "";
         }
+
     },
     created() {
         this.selectedItem(0);

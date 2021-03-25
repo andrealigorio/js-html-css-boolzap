@@ -164,15 +164,18 @@ body {
     height: calc(100% - 140px);
     background-image: url(../img/mine.jpg);
     padding: 30px;
+    position: relative;
 }
 .speech_bubble {
     position: relative;
-    width: 40%;
+    min-width: 40%;
+    max-width: 60%;
     padding: 20px;
     border-radius: 10px;
     margin: 10px 0;
+    clear: both;
 }
-.speech_bubble i {
+.speech_bubble > i {
     position: absolute;
     top: 15px;
     right: 10px;
@@ -185,10 +188,11 @@ body {
 }
 .received_message {
     background-color: white;
+    float: left;
 }
 .sent_message {
     background-color: #d5f9ba;
-    margin-left: 60%;
+    float: right;
 }
 .date_hours {
     position: absolute;
@@ -238,4 +242,30 @@ body {
 }
 .users_item.active {
     background-color: #e9ebeb;
+}
+.layover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: black;
+    z-index: 5;
+    opacity: 40%;
+}
+.details {
+    background-color: white;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+}
+.details > i {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
 }

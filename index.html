@@ -73,8 +73,11 @@
                         <div class="username">
                             <span>{{activeItem.name}}</span>
                         </div>
-                        <div class="last_access">
-                            Ultimo accesso oggi alle
+                        <div class="last_access" v-if="writen">
+                            {{activeItem.name}} sta scrivendo...
+                        </div>
+                        <div class="last_access" v-else="!writen">
+                            Ultimo accesso {{activeItem.messages[activeItem.messages.length-1].date}}
                         </div>
                     </div>
                 </div>
@@ -85,17 +88,21 @@
                 </div>
             </div>
             <div class="message_area">
-                <div v-for="(message, index) in activeMessages" class="speech_bubble" :class="activeMessages[index].status + '_message'">
+                <div :class="layover">
+                </div>
+                <div v-for="(message, index) in activeItem.messages" class="speech_bubble" :class="activeItem.messages[index].status + '_message'">
+                    <div v-show="(layover == 'layover') && (infoControl == index)" class="details"><i @click="closeInfo" class="far fa-times-circle"></i>
+                        Message {{activeItem.messages[index].status}} {{activeItem.messages[index].date}}</div>
                     <i @click="openMessage(index)" class="fas fa-chevron-down"></i>
                     <div class="info_message" v-show="(infoControl == index) && show">
-                        <div>Message info</div>
+                        <div @click="infoMessage">Message info</div>
                         <div @click="deleteMessage(index)">Delete message</div>
                     </div>
                     <div class="message_text">
-                        {{activeMessages[index].text}}
+                        {{activeItem.messages[index].text}}
                     </div>
                     <div class="date_hours">
-                        <span class="date">{{activeMessages[index].date}}</span>
+                        <span class="date">{{activeItem.messages[index].date}}</span>
                     </div>
                 </div>
             </div>
