@@ -136,8 +136,24 @@ body {
     height: calc(100% - 195px);
     background-color: white;
 }
+.contacts > div {
+    position: relative;
+}
 .contacts .image_user {
     height: 70px;
+    min-width: 70px;
+}
+.contact_text .username {
+    margin-bottom: 15px;
+}
+.last_message, .hours {
+    color: grey;
+    font-size: 80%;
+}
+.hours {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 .users_item {
     width: 100%;
@@ -268,4 +284,7 @@ body {
     top: 5px;
     right: 5px;
     cursor: pointer;
+}
+.last_access.bold {
+    font-weight: bold;
 }

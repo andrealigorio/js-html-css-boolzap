@@ -102,8 +102,13 @@ var root = new Vue({
                     },
                     {
                         date: '10/01/2020 15:50:00',
-                        text: 'Tutto bene, grazie',
+                        text: 'Tutto bene, grazie tu?',
                         status: 'received'
+                    },
+                    {
+                        date: '10/01/2020 15:55:25',
+                        text: 'Giornata difficile ma per il resto ok',
+                        status: 'sent'
                     }
                 ],
             },

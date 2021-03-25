@@ -57,8 +57,16 @@
                     <div class="image_user">
                         <img :src="'img/avatar' + item.avatar + '.jpg'" :alt="item.name">
                     </div>
-                    <div class="username">
-                        <span>{{item.name}}</span>
+                    <div class="contact_text">
+                        <div class="username">
+                            <span>{{item.name}}</span>
+                        </div>
+                        <div class="last_message">
+                            <i v-if="item.messages[item.messages.length-1].status == 'sent'" class="fas fa-check-double"></i> {{item.messages[item.messages.length-1].text.slice(0, 50)}}
+                        </div>
+                    </div>
+                    <div class="hours">
+                        {{item.messages[item.messages.length-1].date.slice(11, 16)}}
                     </div>
                 </div>
             </div>
@@ -73,11 +81,11 @@
                         <div class="username">
                             <span>{{activeItem.name}}</span>
                         </div>
-                        <div class="last_access" v-if="writen">
+                        <div class="last_access bold" v-if="writen">
                             {{activeItem.name}} sta scrivendo...
                         </div>
                         <div class="last_access" v-else="!writen">
-                            Ultimo accesso {{activeItem.messages[activeItem.messages.length-1].date}}
+                            Ultimo accesso il {{activeItem.messages[activeItem.messages.length-1].date.slice(0, 10)}} alle ore {{activeItem.messages[activeItem.messages.length-1].date.slice(11,16)}}
                         </div>
                     </div>
                 </div>
