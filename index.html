@@ -86,7 +86,7 @@
                             {{activeItem.name}} sta scrivendo...
                         </div>
                         <div class="last_access" v-else="!writen">
-                            Ultimo accesso il {{activeItem.messages[activeItem.messages.length-1].date.slice(0, 10)}} alle ore {{activeItem.messages[activeItem.messages.length-1].date.slice(11,16)}}
+                            Ultimo accesso {{lastAccess()}} alle ore {{activeItem.messages[activeItem.messages.length-1].date.slice(11,16)}}
                         </div>
                     </div>
                 </div>

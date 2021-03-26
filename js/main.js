@@ -184,7 +184,7 @@ var root = new Vue({
             if(this.newMessage != "") {
                 this.activeItem.messages.push({ text: this.newMessage, 
                                             status: 'sent', 
-                                            date: dayjs().format('DD/MM/YYYY hh:mm:ss')});
+                                            date: dayjs().format('DD/MM/YYYY HH:mm:ss')});
                 this.newMessage = "";
             }
             setTimeout( () => {
@@ -194,7 +194,7 @@ var root = new Vue({
                 this.activeItem.messages.push({
                                             text: this.arrayText[Math.floor(Math.random() * this.arrayText.length)],
                                             status: 'received',
-                                            date: dayjs().format('DD/MM/YYYY hh:mm:ss')});
+                                            date: dayjs().format('DD/MM/YYYY HH:mm:ss')});
                 this.writen = false;
                 this.scrollToBottom();
             }, this.messageTime*1000);
@@ -237,6 +237,22 @@ var root = new Vue({
                 let message = document.getElementsByClassName('speech_bubble');
                 message[message.length - 1].scrollIntoView({ block: "start", inline: "nearest", behavior: "smooth" });
             });
+        },
+        isToday() {
+            if(dayjs().format('DD/MM/YYYY') == this.activeItem.messages[this.activeItem.messages.length - 1].date.slice(0, 10)) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        lastAccess() {
+            let date;
+            if(this.isToday()) {
+                date = "oggi";
+            } else {
+                date = "il " + this.activeItem.messages[this.activeItem.messages.length - 1].date.slice(0, 10);
+            }
+            return date;
         }
     },
     created() {
