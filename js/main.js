@@ -178,24 +178,13 @@ var root = new Vue({
         selectedItem(index) {
             this.activeItem = this.contacts[index];
             this.show = false;
+            this.scrollToBottom();
         },
         addMessage() {
-            var data = new Date();
-            var year = data.getFullYear();
-            var month = data.getMonth();
-            month += 1;
-            var day = data.getDate();
-            var hours = data.getHours();
-            var minuts = data.getMinutes();
-            var seconds = data.getSeconds();
-            if (day < 10) day = "0" + day;
-            if (month < 10) month = "0" + month;
-            if (hours < 10) hours = "0" + hours;
-            if (minuts < 10) minuts = "0" + minuts;
             if(this.newMessage != "") {
                 this.activeItem.messages.push({ text: this.newMessage, 
                                             status: 'sent', 
-                                            date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds}`});
+                                            date: dayjs().format('DD/MM/YYYY hh:mm:ss')});
                 this.newMessage = "";
             }
             setTimeout( () => {
@@ -205,9 +194,11 @@ var root = new Vue({
                 this.activeItem.messages.push({
                                             text: this.arrayText[Math.floor(Math.random() * this.arrayText.length)],
                                             status: 'received',
-                                            date: `${day}/${month}/${year} ${hours}:${minuts}:${seconds + this.messageTime}`});
+                                            date: dayjs().format('DD/MM/YYYY hh:mm:ss')});
                 this.writen = false;
+                this.scrollToBottom();
             }, this.messageTime*1000);
+            this.scrollToBottom();
         },
         searchName(contactName, array) {
             for(var j = 0; j < array.length; j++) {
@@ -227,11 +218,7 @@ var root = new Vue({
             }
         },
         openMessage(index) {
-            if (!this.show) {
-                this.show = true;
-            } else {
-                this.show = false;
-            }
+            this.show = !this.show;
             this.infoControl = index;
         },
         deleteMessage(index) {
@@ -244,10 +231,16 @@ var root = new Vue({
         },
         closeInfo() {
             this.layover = "";
+        },
+        scrollToBottom() {
+            this.$nextTick(() => {
+                let message = document.getElementsByClassName('speech_bubble');
+                message[message.length - 1].scrollIntoView({ block: "start", inline: "nearest", behavior: "smooth" });
+            });
         }
-
     },
     created() {
         this.selectedItem(0);
+        this.scrollToBottom();
     }
 });
