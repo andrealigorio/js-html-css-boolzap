@@ -204,7 +204,7 @@ var root = new Vue({
             for(var j = 0; j < array.length; j++) {
                 var cont = 0;       //Utilizzo variabile contatore per verificare che tutte le lettere corrispondano
                 for(var i = 0; i < contactName.length; i++) {
-                    if ((contactName.charAt(i) != array[j].name.charAt(i).toUpperCase()) && (contactName.charAt(i) != array[j].name.charAt(i).toLowerCase())) {
+                    if ((contactName.charAt(i).toLowerCase() != array[j].name.charAt(i).toLowerCase())) {
                         array[j].visible = false;
                     } else {
                         cont++;
